@@ -1,2 +1,2 @@
 # eled
-A minimal Emacs derived from Atto
+A minimal and modal Emacs derived from Atto
