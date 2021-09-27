@@ -1,9 +1,10 @@
-/* key.c, Atto Emacs, Public Domain, Hugh Barney, 2016, Derived from: Anthony's Editor January 93 */
+/* key.c, eled, Public Domain. Based on: Atto Emacs, Public Domain, Hugh Barney, 2016, Derived from: Anthony's Editor January 93 */
 
 #include "header.h"
 
 /* desc, keys, func */
 keymap_t keymap[] = {
+	{"esc			   ", "\x1B", mode_change },
 	{"C-a beginning-of-line    ", "\x01", lnbegin },
 	{"C-b backward-char        ", "\x02", left },
 	{"C-d delete               ", "\x04", delete },

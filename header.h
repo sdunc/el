@@ -1,7 +1,6 @@
 /* header.h, eled, Public Domain, Stephen Duncanson, 2021
-Derived from:
-Atto Emacs, Public Domain, Hugh Barney, 2016
-Anthony's Editor January 93 */
+Derived from: Atto Emacs, Public Domain, Hugh Barney, 2016
+Which itself was based on, Anthony's Editor January 93 */
 
 #define _XOPEN_SOURCE
 #include <locale.h>
@@ -106,6 +105,7 @@ extern window_t *wheadp;
 #define MAX_SIZE_T      ((unsigned long) (size_t) ~0)
 
 extern int done;                /* Quit flag. */
+extern int mode;		/* Mode flag */
 extern int msgflag;             /* True if msgline should be displayed. */
 extern point_t nscrap;          /* Length of scrap buffer. */
 extern char_t *scrap;           /* Allocated scrap buffer. */
@@ -118,6 +118,7 @@ extern keymap_t *key_map;       /* Command key mappings. */
 extern keymap_t keymap[];
 extern keymap_t *key_return;    /* Command key return */
 
+extern void god_command(void);
 extern void fatal(char *);
 extern void msg(char *, ...);
 extern void display(window_t *, int);

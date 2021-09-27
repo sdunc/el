@@ -3,6 +3,7 @@
 #include "header.h"
 
 int done;
+int mode = 0;
 point_t nscrap;
 char_t *scrap;
 
@@ -62,13 +63,20 @@ int main(int argc, char **argv)
 
 		if (key_return != NULL) {
 			(key_return->func)();
-		} else {
-			/* allow TAB and NEWLINE, otherwise any Control Char is 'Not bound' */
-			if (*input > 31 || *input == 10 || *input == 9)
-				insert();
-                        else {
-				flushinp(); /* discard without writing in buffer */
-				msg("Not bound");
+		} 
+		else {	
+			// execute a command, dirty hack to emulate modal editng
+			if (mode) {
+				god_command();
+			}
+			else { // insert a char
+				/* allow TAB and NEWLINE, otherwise any Control Char is 'Not bound' */
+				if (*input > 31 || *input == 10 || *input == 9)
+					insert();
+                        	else {
+					flushinp(); /* discard without writing in buffer */
+					msg("Not bound");
+				}
 			}
 		}
 	}

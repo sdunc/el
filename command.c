@@ -14,10 +14,12 @@ void copy() { copy_cut(FALSE); }
 void cut() { copy_cut(TRUE); }
 void resize_terminal() { one_window(curwp); }
 
+
+
 void mode_change()
 {
-	mvaddstr(MSGLINE, 0, "Modified buffers exist; really exit (y/n) ?");
-	clrtoeol();
+	if (mode==1) mode = 0;
+	else mode = 1;
 	return;
 
 }
@@ -28,7 +30,7 @@ void quit_ask()
 		mvaddstr(MSGLINE, 0, "Modified buffers exist; really exit (y/n) ?");
 		clrtoeol();
 		if (!yesno(FALSE))
-			return;
+		return;
 	}
 	quit();
 }
@@ -130,6 +132,62 @@ void wright()
 		++curbp->b_point;
 	while (isspace(*(p = ptr(curbp, curbp->b_point))) && p < curbp->b_ebuf)
 		++curbp->b_point;
+}
+
+void god_command()
+{
+	switch (*input) {
+	case 'a':
+		lnbegin();
+		break;
+	case 'b':
+		left();
+		break;
+	case 'c':
+		break;
+	case 'd':
+		delete();
+		break;
+	case 'e':
+		lnend();
+		break;
+	case 'f':
+		right();
+		break;
+	case 'h':
+		break;
+	case 'k':
+		killtoeol();
+		break;
+	case 'l':
+		redraw();
+		break;
+	case 'n':
+		down();
+		break;
+	case 'p':
+		up();
+		break;
+	case 'r':
+	case 's':
+		search();
+		break;
+	case 'v':
+		pgdown();
+		break;
+	case 'w':
+		cut();
+		break;
+	case 'y':
+		paste();
+		break;
+	case ' ':
+		iblock();
+		break;
+	}
+	char_t s = (char_t)*input;
+	msg(&s);
+	return;
 }
 
 void insert()

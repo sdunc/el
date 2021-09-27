@@ -193,11 +193,12 @@ void modeline(window_t *wp)
 	
 	attron(COLOR_PAIR(ID_MODELINE));
 	move(wp->w_top + wp->w_rows, 0);
-	lch = (wp == curwp ? '=' : '-');
+	if (mode) lch = (wp == curwp ? '+' : 'x');
+	else lch = (wp == curwp ? '=' : '-');
 	mch = ((wp->w_bufp->b_flags & B_MODIFIED) ? '*' : lch);
 	och = ((wp->w_bufp->b_flags & B_OVERWRITE) ? 'O' : lch);
 
-	sprintf(temp, "%c%c%c eled: %c%c %s",  lch,och,mch,lch,lch, get_buffer_name(wp->w_bufp));
+	sprintf(temp, "%c%c%cc eled: %c%c %s",  lch,och,mch,lch,lch, get_buffer_name(wp->w_bufp));
 	addstr(temp);
 
 	for (i = strlen(temp) + 1; i <= COLS; i++)

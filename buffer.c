@@ -1,4 +1,4 @@
-/* buffer.c, Atto Emacs, Hugh Barney, Public Domain, 2015 */
+/* buffer.c, eled, Public Domain, 2021 */
 
 #include <assert.h>
 #include <string.h>
@@ -22,6 +22,7 @@ void buffer_init(buffer_t *bp)
 	bp->b_egap = NULL;
 	bp->b_next = NULL;
 	bp->b_fname[0] = '\0';
+	//bp->b_mode = 0; // 0 for insert mode, 1 for god mode.
 }
 
 /* Find a buffer by filename or create if requested */
